@@ -1,5 +1,7 @@
 {
-  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+  };
 
   outputs = { self, nixpkgs }:
   let
@@ -13,9 +15,10 @@
         cargo
       ];
 
-      shellHooks = [
-        "fish"
-      ];
+      shellHooks = ''
+        fish
+        exit
+      '';
     };
   };
 }
