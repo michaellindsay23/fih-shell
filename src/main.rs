@@ -2,7 +2,11 @@ use std::{env, io::{Write, stdin, stdout}, path::Path, process::Command};
 
 fn main() {
     loop {
-        print!("> ");
+        let current_dir = env::current_dir();
+        match current_dir {
+            Ok(current_dir) => print!("{}> ", current_dir.display()),
+            Err(e) => eprintln!("{}", e)
+        }
         let _ = stdout().flush();
 
         let mut input = String::new();
