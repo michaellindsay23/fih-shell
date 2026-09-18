@@ -16,7 +16,7 @@ fn main() {
         // Print current directory with shell input
         let current_dir = env::current_dir();
         match current_dir {
-            Ok(current_dir) => print!("{}> ", current_dir.display()),
+            Ok(current_dir) => print!("{}\n> ", current_dir.display()),
             Err(e) => eprintln!("{}", e)
         }
         let _ = stdout().flush();
@@ -90,5 +90,6 @@ fn main() {
                 let _ = final_command.wait();
             }
         }        
+        print!("\n");
     }
 }
