@@ -1,10 +1,11 @@
 use std::{
     env, io::{
-        Stdout, Write, stdin, stdout
+        Write, stdin, stdout
     }, path::Path, process::{
         Child, Command, Stdio
     }
 };
+
 
 fn main() {
     // Stacks for storing previously executed commands
@@ -34,7 +35,7 @@ fn main() {
         while let Some(command) = commands.next() {
 
             // Split input string into primary command and arguments
-            let mut parts = input.trim().split_whitespace();
+            let mut parts = command.trim().split_whitespace();
             let command = parts.next().unwrap();
             let args = parts;
 
@@ -63,10 +64,10 @@ fn main() {
 
                     let stdout = if commands.peek().is_some() {
                         // Prepare to send output to the next command
-                        Stdio::piped();
+                        Stdio::piped()
                     } else {
                         // Send output to shell stdout
-                        Stdio::inherit();
+                        Stdio::inherit()
                     };
                 
                     let mut output = Command::new(command)
@@ -84,9 +85,9 @@ fn main() {
                     };
                 }
             }
-            if let Some(mut final_command) = previous_command {
+            if let Some(ref mut final_command) = previous_command {
                 // Block thread until the final command has finished
-                final_command.wait();
+                let _ = final_command.wait();
             }
         }        
     }
