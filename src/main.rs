@@ -1,6 +1,18 @@
-use std::{env, io::{Write, stdin, stdout}, path::Path, process::Command};
+use std::{
+    env,
+    io::{
+        Write, 
+        stdin,
+        stdout
+    }, 
+    path::Path, 
+    process::Command
+};
 
 fn main() {
+    let mut previous_stack: Vec<String> = Vec::new();
+    let mut next_stack: Vec<String> = Vec::new();
+
     loop {
         let current_dir = env::current_dir();
         match current_dir {
@@ -11,6 +23,8 @@ fn main() {
 
         let mut input = String::new();
         stdin().read_line(&mut input).unwrap();
+
+        previous_stack.push(input.clone());
     
         let mut parts = input.trim().split_whitespace();
         let command = parts.next().unwrap();
