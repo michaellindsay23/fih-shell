@@ -5,12 +5,12 @@ use std::{
         Child, Command, Stdio
     }
 };
-
+use crossterm;
 
 fn main() {
     // Stacks for storing previously executed commands
-    let mut previous_stack: Vec<String> = Vec::new();
-    let mut next_stack: Vec<String> = Vec::new();
+    let mut history_vector: Vec<String> = Vec::new();
+    let mut history_index: u32 = 0;
 
     loop {
         // Print current directory with shell input
@@ -30,7 +30,7 @@ fn main() {
         let mut previous_command = None;
 
         // Log last executed command
-        previous_stack.push(input.clone());
+        history_vector.push(input.clone());
     
         while let Some(command) = commands.next() {
 
@@ -93,3 +93,12 @@ fn main() {
         print!("\n");
     }
 }
+
+fn takeInput(
+    history_vec: &Vec<String>,
+    history_index: &mut u32
+) {
+    
+}
+
+
